@@ -9,6 +9,8 @@ variable "node_type" {}
 variable "cluster_type" {}
 variable "project_name" {}
 variable "SMname" {}
-variable "no_nodes" {}
-variable "secret_arn" {}
-variable "RScluster_identifier" {}
+variable "RS_username" {}
+variable "RS_password" {}
+# variable "db_name" {}
+# variable "db_username" {}
+# variable "db_password" {}

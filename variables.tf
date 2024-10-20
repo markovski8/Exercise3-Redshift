@@ -14,7 +14,15 @@ variable "subRSa_cidr" {}
 variable "subRSb_cidr" {}
 variable "project_name" {}
 variable "SMname" {}
-
+variable "no_nodes" {}
+variable "RS_username" {
+    sensitive = true
+}
+variable "RS_password" {
+    sensitive = true
+}
+variable "secret_arn" {}
+variable "RScluster_identifier" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}

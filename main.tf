@@ -20,6 +20,9 @@ source = "./components/redshift"
 #   db_password = var.db_password
   project_name = var.project_name
   SMname = var.SMname
+  no_nodes = var.no_nodes
+  RScluster_identifier = var.RScluster_identifier
+  secret_arn = module.secretM.secret_arn
 
 }
 

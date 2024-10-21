@@ -6,18 +6,17 @@ module "vpc" {
     AZa = var.AZa
     AZb = var.AZb
     cidrvpc = var.vpcRS_cidr
+    app_environment = var.app_environment
+    app_name = var.app_name
 }
 
 module "redshift" {
 source = "./components/redshift"
-  database_name      = var.database_name
-  master_username    = var.master_username
-  master_password    = var.master_password
+  database_name      = var.rs_database_name
+  master_username    = var.RS_username
+  master_password    = var.RS_password
   node_type          = var.node_type
   cluster_type       = var.cluster_type
-#   db_name = var.db_name
-#   db_username = var.db_username
-#   db_password = var.db_password
   project_name = var.project_name
   SMname = var.SMname
   no_nodes = var.no_nodes
@@ -28,8 +27,8 @@ source = "./components/redshift"
 
 module "secretM" {
   source = "./components/secretM"
-  master_username = var.master_username
-  master_password = var.master_password
+  master_username = var.RS_username
+  master_password = var.RS_password
   SMname = var.SMname
   rs_database_name = var.rs_database_name 
   project_name = var.project_name

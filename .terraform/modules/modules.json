@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"redshift","Source":"./components/redshift","Dir":"components/redshift"},{"Key":"secretM","Source":"./components/secretM","Dir":"components/secretM"},{"Key":"vpc","Source":"./components/vpc","Dir":"components/vpc"}]}

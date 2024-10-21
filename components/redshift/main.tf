@@ -9,7 +9,9 @@ resource "aws_redshift_cluster" "RScluster" {
   number_of_nodes = var.no_nodes
   skip_final_snapshot = true
   depends_on = [ data.aws_secretsmanager_secret_version.RSsecretmanager ]
-   iam_roles = [aws_iam_role.RSrole.arn]
+  iam_roles = [aws_iam_role.RSrole.arn]
+  cluster_subnet_group_name = aws_redshift_subnet_group.redshift-sub-gr.id
+  
 
   }
 data "aws_secretsmanager_secret" "RSsecret" {
@@ -26,20 +28,30 @@ locals {
 
 # iams
 resource "aws_iam_role" "RSrole" {
-  name               = "RedshiftSecretAccessRole"
-  description        = "IAM role for Redshift to access secrets in Secrets Manager"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "redshift.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
+  name = "${var.project_name}-RSrole"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": [
+                    "scheduler.redshift.amazonaws.com",
+                    "redshift.amazonaws.com"
+                ]
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+
+  tags = {
+    Name        = "${var.project_name}-RSrole"
+  }
 }
 resource "aws_iam_policy" "redshift_secret_access_policy" {
   name        = "RedshiftSecretAccessPolicy"

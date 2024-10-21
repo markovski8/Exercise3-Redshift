@@ -22,13 +22,10 @@ resource "aws_subnet" "subRSb" {
   }
 }
 
-resource "aws_db_subnet_group" "subGroupRS" {
-  name       = "rds-db-subnet-group"
-  subnet_ids = [aws_subnet.subRSa,aws_subnet.subRSb]  
-
-  tags = {
-    Name = "subGroup"
-  }
+resource "aws_redshift_subnet_group" "redshift-sub-gr" {
+depends_on = [ aws_subnet.subRSa,aws_subnet.subRSb ]
+name       = "${var.project_name}-sub-gr"
+subnet_ids = [aws_subnet.subRSa.id, aws_subnet.subRSb.id]
 }
 
 resource "aws_security_group" "sgRS" {
@@ -41,8 +38,8 @@ resource "aws_security_group" "sgRS" {
     from_port   = 5439
     to_port     = 5439
     protocol    = "tcp"
-    cidr_blocks = var.vpcRS_cidr  
-    security_groups = [aws_security_group.sgRS.id]
+    cidr_blocks = ["0.0.0.0/0"]  
+    # security_groups = [aws_security_group.sgRS.id]
   }
 
   egress {
@@ -68,11 +65,11 @@ resource "aws_route_table" "RStable" {
   }
 }
 resource "aws_route_table_association" "subnet_associationA" {
-  subnet_id      = aws_subnet.subRSa
+  subnet_id      = aws_subnet.subRSa.id
   route_table_id = aws_route_table.RStable.id
 }
 resource "aws_route_table_association" "subnet_associationB" {
-  subnet_id      = aws_subnet.subRSb
+  subnet_id      = aws_subnet.subRSb.id
   route_table_id = aws_route_table.RStable.id
 }
 

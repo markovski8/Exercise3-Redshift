@@ -2,7 +2,7 @@ variable "region" {}
 variable "profile" {}
 # variable "email" {}
 # variable "account_id" {}
-variable "database_name" {}
+variable "rs_database_name" {}
 variable "master_username" {}
 variable "master_password" {}
 variable "node_type" {}
@@ -26,4 +26,5 @@ variable "rs-cluster-identifier1" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}
-variable "rs_database_name" {}
+variable "app_name" {}
+variable "app_environment" {}

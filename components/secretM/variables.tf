@@ -2,7 +2,7 @@
 # variable "profile" {}
 # variable "email" {}
 # variable "account_id" {}
-variable "database_name" {}
+variable "rs_database_name" {}
 variable "master_username" {}
 variable "master_password" {}
 variable "node_type" {}

@@ -1,5 +1,5 @@
 resource "aws_redshift_cluster" "RScluster" {
-  cluster_identifier = var.RScluster_identifier
+  cluster_identifier = var.rs-cluster-identifier1
   database_name = local.secret_data["name"]
   master_username = local.secret_data["username"]
   master_password = local.secret_data["password"]

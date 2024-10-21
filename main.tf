@@ -21,8 +21,25 @@ source = "./components/redshift"
   project_name = var.project_name
   SMname = var.SMname
   no_nodes = var.no_nodes
-  RScluster_identifier = var.RScluster_identifier
+  rs-cluster-identifier1 = var.rs-cluster-identifier1
   secret_arn = module.secretM.secret_arn
 
 }
 
+module "secretM" {
+  source = "./components/secretM"
+  master_username = var.master_username
+  master_password = var.master_password
+  SMname = var.SMname
+  rs_database_name = var.rs_database_name 
+  project_name = var.project_name
+  RS_username = var.RS_username
+  RS_password = var.RS_password
+  cluster_type = var.cluster_type
+  node_type = var.node_type
+  
+  
+}
+output "secret_arn" {
+  value = module.secretM.secret_arn
+}

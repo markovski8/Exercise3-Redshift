@@ -10,7 +10,7 @@ resource "aws_secretsmanager_secret" "RSsecret" {
 resource "aws_secretsmanager_secret_version" "RSsecretmanager" {
 secret_id     = aws_secretsmanager_secret.RSsecret.id
 secret_string = jsonencode({
-database_name   = aws_redshift_cluster.RScluster.database_name
+rs_database_name   = var.rs_database_name
 username    = var.RS_username
 password    = var.RS_password
   })

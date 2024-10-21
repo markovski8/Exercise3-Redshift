@@ -21,8 +21,9 @@ variable "RS_username" {
 variable "RS_password" {
     sensitive = true
 }
-variable "secret_arn" {}
-variable "RScluster_identifier" {}
+# variable "secret_arn" {}
+variable "rs-cluster-identifier1" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}
+variable "rs_database_name" {}

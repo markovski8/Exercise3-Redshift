@@ -2,7 +2,7 @@ output "secret_arn" {
   value = aws_secretsmanager_secret.RSsecret.arn
 }
 output "secret_name" {
-  value = aws_secretsmanager_secret.RSsecretmanager.name
+  value = aws_secretsmanager_secret.RSsecret.name
 }
 output "secret_id" {
   value = aws_secretsmanager_secret.RSsecret.id

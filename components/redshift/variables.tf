@@ -11,4 +11,4 @@ variable "project_name" {}
 variable "SMname" {}
 variable "no_nodes" {}
 variable "secret_arn" {}
-variable "RScluster_identifier" {}
+variable "rs-cluster-identifier1" {}

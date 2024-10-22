@@ -3,8 +3,8 @@ variable "profile" {}
 # variable "email" {}
 # variable "account_id" {}
 variable "rs_database_name" {}
-variable "master_username" {}
-variable "master_password" {}
+# variable "master_username" {}
+# variable "master_password" {}
 variable "node_type" {}
 variable "cluster_type" {}
 variable "vpcRS_cidr" {}
@@ -28,3 +28,4 @@ variable "rs-cluster-identifier1" {}
 # variable "db_password" {}
 variable "app_name" {}
 variable "app_environment" {}
+# variable "redsub-gr"{}

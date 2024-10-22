@@ -10,7 +10,7 @@ resource "aws_redshift_cluster" "RScluster" {
   skip_final_snapshot = true
   depends_on = [ data.aws_secretsmanager_secret_version.RSsecretmanager ]
   iam_roles = [aws_iam_role.RSrole.arn]
-  cluster_subnet_group_name = aws_redshift_subnet_group.redshift-sub-gr.id
+  cluster_subnet_group_name = var.redsub-gr
   
 
   }

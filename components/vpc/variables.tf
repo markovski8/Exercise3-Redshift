@@ -6,3 +6,4 @@ variable "subRSa_cidr" {}
 variable "subRSb_cidr" {}
 variable "app_name" {}
 variable "app_environment" {}
+variable "project_name" {}

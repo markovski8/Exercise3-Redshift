@@ -1,5 +1,6 @@
 module "vpc" {
     source = "./components/vpc"
+    project_name = var.project_name
     vpcRS_cidr = var.vpcRS_cidr
     subRSa_cidr = var.subRSa_cidr
     subRSb_cidr = var.subRSb_cidr
@@ -22,6 +23,7 @@ source = "./components/redshift"
   no_nodes = var.no_nodes
   rs-cluster-identifier1 = var.rs-cluster-identifier1
   secret_arn = module.secretM.secret_arn
+  redsub-gr = module.vpc.redshift-sub-gr
 
 }
 

@@ -22,10 +22,9 @@ variable "RS_password" {
     sensitive = true
 }
 # variable "secret_arn" {}
-variable "rs_cluster_id" {}
+variable "rs-cluster-ident" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}
 variable "app_name" {}
 variable "app_environment" {}
-# variable "redsub-gr"{}

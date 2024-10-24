@@ -14,16 +14,19 @@ module "vpc" {
 module "redshift" {
 source = "./components/redshift"
   database_name      = var.rs_database_name
-  master_username    = var.RS_username
-  master_password    = var.RS_password
+  # master_username    = var.RS_username
+  # master_password    = var.RS_password
   node_type          = var.node_type
   cluster_type       = var.cluster_type
   project_name = var.project_name
   SMname = var.SMname
   no_nodes = var.no_nodes
-  rs_cluster_id = var.rs_cluster_id
+  rs-cluster-ident = var.rs-cluster-ident
   secret_arn = module.secretM.secret_arn
   redsub-gr = module.vpc.redshift-sub-gr
+  rs_database_name = var.rs_database_name
+  RS_username = var.RS_username 
+  RS_password = var.RS_password
 
 }
 
@@ -44,3 +47,8 @@ module "secretM" {
 output "secret_arn" {
   value = module.secretM.secret_arn
 }
+
+output "rs-cluster-ident" {
+  value = var.rs-cluster-ident
+}
+

@@ -15,10 +15,10 @@ variable "subRSb_cidr" {}
 variable "project_name" {}
 variable "SMname" {}
 variable "no_nodes" {}
-variable "RS_username" {
+variable "rs_username" {
     sensitive = true
 }
-variable "RS_password" {
+variable "rs_password" {
     sensitive = true
 }
 # variable "secret_arn" {}

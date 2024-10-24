@@ -88,13 +88,13 @@ output "master_password" {
 
 
 
-variable "RS_password" {
+variable "rs_password" {
   description = "Redshift master password"
   type        = string
   sensitive   = true  # Mark as sensitive to avoid displaying in logs
 }
 
-variable "RS_username" {
+variable "rs_username" {
   description = "Redshift master username"
   type        = string
 }

@@ -14,8 +14,8 @@ module "vpc" {
 module "redshift" {
 source = "./components/redshift"
   database_name      = var.rs_database_name
-  # master_username    = var.RS_username
-  # master_password    = var.RS_password
+  # master_username    = var.rs_username
+  # master_password    = var.rs_password
   node_type          = var.node_type
   cluster_type       = var.cluster_type
   project_name = var.project_name
@@ -25,20 +25,20 @@ source = "./components/redshift"
   secret_arn = module.secretM.secret_arn
   redsub-gr = module.vpc.redshift-sub-gr
   rs_database_name = var.rs_database_name
-  RS_username = var.RS_username 
-  RS_password = var.RS_password
+  rs_username = var.rs_username 
+  rs_password = var.rs_password
 
 }
 
 module "secretM" {
   source = "./components/secretM"
-  master_username = var.RS_username
-  master_password = var.RS_password
+  master_username = var.rs_username
+  master_password = var.rs_password
   SMname = var.SMname
   rs_database_name = var.rs_database_name 
   project_name = var.project_name
-  RS_username = var.RS_username
-  RS_password = var.RS_password
+  rs_username = var.rs_username
+  rs_password = var.rs_password
   cluster_type = var.cluster_type
   node_type = var.node_type
   
@@ -52,3 +52,29 @@ output "rs-cluster-ident" {
   value = var.rs-cluster-ident
 }
 
+# output "master_password" {
+#   value = local.secret_data["password"]
+# }
+
+
+
+# variable "rs_password" {
+#   description = "Redshift master password"
+#   type        = string
+#   sensitive   = true  # Mark as sensitive to avoid displaying in logs
+# }
+
+# variable "rs_username" {
+#   description = "Redshift master username"
+#   type        = string
+# }
+
+# variable "rs_database_name" {
+#   description = "Name of the database"
+#   type        = string
+# }
+
+# output "debug_master_password" {
+#   value = local.secret_data["password"]
+#   sensitive = true  # This will prevent it from being displayed in logs
+# }

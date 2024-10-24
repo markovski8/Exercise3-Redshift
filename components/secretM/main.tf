@@ -11,8 +11,8 @@ resource "aws_secretsmanager_secret_version" "rs-secretmanager" {
 secret_id     = aws_secretsmanager_secret.rs-secret.id
 secret_string = jsonencode({
 name   = var.rs_database_name
-username    = var.RS_username
-password    = var.RS_password
+username    = var.rs_username
+password    = var.rs_password
   })
 }
 

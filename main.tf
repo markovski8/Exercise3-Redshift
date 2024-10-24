@@ -21,7 +21,7 @@ source = "./components/redshift"
   project_name = var.project_name
   SMname = var.SMname
   no_nodes = var.no_nodes
-  rs_cluster_identifier1 = var.rs_cluster_identifier1
+  rs_cluster_id = var.rs_cluster_id
   secret_arn = module.secretM.secret_arn
   redsub-gr = module.vpc.redshift-sub-gr
 

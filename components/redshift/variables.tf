@@ -11,5 +11,5 @@ variable "project_name" {}
 variable "SMname" {}
 variable "no_nodes" {}
 variable "secret_arn" {}
-variable "rs_cluster_identifier1" {}
+variable "rs_cluster_id" {}
 variable "redsub-gr" {}

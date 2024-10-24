@@ -22,7 +22,7 @@ variable "RS_password" {
     sensitive = true
 }
 # variable "secret_arn" {}
-variable "rs_cluster_identifier1" {}
+variable "rs_cluster_id" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}

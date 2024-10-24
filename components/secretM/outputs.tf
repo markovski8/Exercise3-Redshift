@@ -9,4 +9,7 @@ output "secret_id" {
 }
 output "secret_version_id" {
   value = aws_secretsmanager_secret_version.RSsecretmanager.id
+
+  
 }
+

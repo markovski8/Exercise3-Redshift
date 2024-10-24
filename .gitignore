@@ -2,7 +2,6 @@
 .terraform/*
 *.hcl
 *local_key*
-!terraform.tfvars
 
 # .tfstate files
 *.tfstate

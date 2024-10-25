@@ -13,3 +13,9 @@ variable "no_nodes" {}
 variable "secret_arn" {}
 variable "rs-cluster-ident" {}
 variable "redsub-gr" {}
+variable "iam_roles_arn"{}
+variable "r-public" {}
+variable "RSencrypted" {}
+variable "sgRS" {
+  
+}

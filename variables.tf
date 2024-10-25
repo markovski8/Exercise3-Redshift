@@ -28,3 +28,5 @@ variable "rs-cluster-ident" {}
 # variable "db_password" {}
 variable "app_name" {}
 variable "app_environment" {}
+variable "r-public" {}
+variable "RSencrypted" {}

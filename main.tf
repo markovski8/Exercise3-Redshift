@@ -9,16 +9,15 @@ module "vpc" {
     cidrvpc = var.vpcRS_cidr
     app_environment = var.app_environment
     app_name = var.app_name
+  
 }
 
 module "redshift" {
 source = "./components/redshift"
+  project_name = var.project_name
   database_name      = var.rs_database_name
-  # master_username    = var.rs_username
-  # master_password    = var.rs_password
   node_type          = var.node_type
   cluster_type       = var.cluster_type
-  project_name = var.project_name
   SMname = var.SMname
   no_nodes = var.no_nodes
   rs-cluster-ident = var.rs-cluster-ident
@@ -27,13 +26,17 @@ source = "./components/redshift"
   rs_database_name = var.rs_database_name
   rs_username = var.rs_username 
   rs_password = var.rs_password
+  iam_roles_arn = module.redshift.iam_roles_arn
+  r-public = var.r-public
+  RSencrypted = var.RSencrypted
+  sgRS = module.vpc.sgRS-id
+
+  
 
 }
 
 module "secretM" {
   source = "./components/secretM"
-  master_username = var.rs_username
-  master_password = var.rs_password
   SMname = var.SMname
   rs_database_name = var.rs_database_name 
   project_name = var.project_name
@@ -44,6 +47,12 @@ module "secretM" {
   
   
 }
+module "IAM" {
+  source = "./components/IAM"
+  project_name = var.project_name
+  
+}
+ 
 output "secret_arn" {
   value = module.secretM.secret_arn
 }

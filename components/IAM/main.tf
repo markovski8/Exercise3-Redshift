@@ -44,7 +44,7 @@ resource "aws_iam_policy" "redshift-scheduler-policy" {
     ]
   })
 }
-resource "aws_iam_policy" "redshift_secret_access_policy" {
+resource "aws_iam_policy" "redshift-secret-access-policy" {
   name        = "RedshiftSecretAccessPolicy"
   description = "IAM policy for Redshift to access secrets in Secrets Manager"
 
@@ -66,10 +66,10 @@ resource "aws_iam_policy" "redshift_secret_access_policy" {
 }
 resource "aws_iam_role_policy_attachment" "rs-secretm-policy-attachment" {
   role = aws_iam_role.RSrole.name
-  policy_arn = aws_iam_policy.redshift-secret-manager-policy.arn
+  policy_arn = aws_iam_policy.redshift-secret-access-policy.arn
 }
 resource "aws_iam_role_policy_attachment" "rs-policy-attachment" {
-    role = aws_iam_role.RSrole
+    role = aws_iam_role.RSrole.name
     policy_arn = aws_iam_policy.redshift-scheduler-policy.arn
   
 }

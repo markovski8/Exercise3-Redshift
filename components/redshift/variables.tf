@@ -16,6 +16,6 @@ variable "redsub-gr" {}
 variable "iam_roles_arn"{}
 variable "r-public" {}
 variable "RSencrypted" {}
-variable "sgRS" {
-  
-}
+variable "sgRS" {}
+variable "secret_id" {}
+variable "secret_version_id" {}

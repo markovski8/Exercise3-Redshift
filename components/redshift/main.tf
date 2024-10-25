@@ -35,33 +35,7 @@ output "secret_data" {
   value = local.secret_data
 }
 
-# iams
 
-resource "aws_iam_policy" "redshift_secret_access_policy" {
-  name        = "RedshiftSecretAccessPolicy"
-  description = "IAM policy for Redshift to access secrets in Secrets Manager"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "secretsmanager:GetSecretValue",
-          "secretsmanager:DescribeSecret",
-          "secretsmanager:RestoreSecret"
-          
-        ]
-        Resource = "*"
-      }
-    ]
-  })
-}
-resource "aws_iam_policy_attachment" "redshift_policy_attachment" {
-  name       = "RedshiftPolicyAttachment"
-  policy_arn = aws_iam_policy.redshift_secret_access_policy.arn
-  roles      = [aws_iam_role.RSrole.name]
-}
 output "master_password" {
   value = local.secret_data["password"]
 }

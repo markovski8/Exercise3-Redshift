@@ -16,26 +16,4 @@ password    = var.rs_password
   })
 }
 
-resource "aws_iam_policy" "redshift-secret-manager-policy" {
-  name        = "${var.project_name}-redshift-secrets-manager-policy"
-  description = "Policy to allow Redshift to read from Secrets Manager"
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "secretsmanager:GetSecretValue",
-          "secretsmanager:DescribeSecret"
-        ],
-        Resource = "*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "rs-secretm-policy-attachment" {
-  role = module.redshift.iam_roles.name
-  policy_arn = module.redshift.aws_iam_role.RSrole.arn
-}

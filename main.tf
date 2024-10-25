@@ -26,10 +26,15 @@ source = "./components/redshift"
   rs_database_name = var.rs_database_name
   rs_username = var.rs_username 
   rs_password = var.rs_password
-  iam_roles_arn = module.redshift.iam_roles_arn
+  iam_roles_arn = module.IAM.iam_roles_arn
   r-public = var.r-public
   RSencrypted = var.RSencrypted
   sgRS = module.vpc.sgRS-id
+  secret_id         = module.secretmanager.secret_id
+  secret_version_id = module.secretmanager.secret_version_id
+  
+  
+
 
   
 

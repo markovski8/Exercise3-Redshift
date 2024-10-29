@@ -24,41 +24,66 @@ resource "aws_redshift_cluster" "rs-cluster" {
   cluster_subnet_group_name = var.redsub-gr
   publicly_accessible = var.r-public
   encrypted = var.RSencrypted
-  vpc_security_group_ids = var.sgRS
+  vpc_security_group_ids = var.sgRSid
  
   
   
 
   }
+  
 
-output "secret_data" {
-  value = local.secret_data
+# output "secret_data" {
+#   value = local.secret_data
+# }
+
+
+# output "master_password" {
+#   value = local.secret_data["password"]
+# }
+
+
+
+# variable "rs_password" {
+#   description = "Redshift master password"
+#   type        = string
+#   sensitive   = true  # Mark as sensitive to avoid displaying in logs
+# }
+
+# variable "rs_username" {
+#   description = "Redshift master username"
+#   type        = string
+# }
+
+# variable "rs_database_name" {
+#   description = "Name of the database"
+#   type        = string
+# }
+
+# output "debug_master_password" {
+#   value = local.secret_data["password"]
+#   sensitive = true  # This will prevent it from being displayed in logs
+# }
+
+resource "aws_redshift_scheduled_action" "resume" {
+  name     = "resume-redshift-cluster"
+  schedule = "cron(0 8 ? * MON-FRI *)"
+  iam_role = var.iam_roles_arn
+
+  target_action {
+    resume_cluster {
+      cluster_identifier = aws_redshift_cluster.rs-cluster.cluster_identifier
+    }
+  }
 }
 
+resource "aws_redshift_scheduled_action" "pause" {
+  name     = "pause-redshift-cluster"
+  schedule = "cron(0 17 ? * MON-FRI *)"
+  iam_role = var.iam_roles_arn
 
-output "master_password" {
-  value = local.secret_data["password"]
-}
-
-
-
-variable "rs_password" {
-  description = "Redshift master password"
-  type        = string
-  sensitive   = true  # Mark as sensitive to avoid displaying in logs
-}
-
-variable "rs_username" {
-  description = "Redshift master username"
-  type        = string
-}
-
-variable "rs_database_name" {
-  description = "Name of the database"
-  type        = string
-}
-
-output "debug_master_password" {
-  value = local.secret_data["password"]
-  sensitive = true  # This will prevent it from being displayed in logs
+  target_action {
+    pause_cluster {
+      cluster_identifier = aws_redshift_cluster.rs-cluster.cluster_identifier
+    }
+  }
 }

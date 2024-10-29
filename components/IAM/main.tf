@@ -45,21 +45,19 @@ resource "aws_iam_policy" "redshift-scheduler-policy" {
   })
 }
 resource "aws_iam_policy" "redshift-secret-access-policy" {
-  name        = "RedshiftSecretAccessPolicy"
-  description = "IAM policy for Redshift to access secrets in Secrets Manager"
+  name        = "${var.project_name}-redshift-secret-access-policy"
+  description = "Policy to allow Redshift to read from Secrets Manager"
 
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
-        Effect = "Allow"
+        Effect = "Allow",
         Action = [
           "secretsmanager:GetSecretValue",
-          "secretsmanager:DescribeSecret",
-          "secretsmanager:RestoreSecret"
-          
-        ]
-        Resource = "*"
+          "secretsmanager:DescribeSecret"
+        ],
+        Resource = "arn:aws:secretsmanager:eu-central-1:471112871708:secret:redshift-secret4-bz36fB"
       }
     ]
   })
@@ -73,3 +71,4 @@ resource "aws_iam_role_policy_attachment" "rs-policy-attachment" {
     policy_arn = aws_iam_policy.redshift-scheduler-policy.arn
   
 }
+

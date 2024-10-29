@@ -3,7 +3,7 @@ output "redshift-sub-gr" {
   value = aws_redshift_subnet_group.redshift-sub-gr.name
 }
 
-output "sgRS-id" {
+output "sgRSid" {
   description = "security group id redshift"
-  value       = [aws_security_group.sgRS.id]
+  value       = [aws_default_security_group.redshift_security_group.id]
 }

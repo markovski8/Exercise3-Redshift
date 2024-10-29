@@ -15,7 +15,7 @@ module "vpc" {
 module "redshift" {
 source = "./components/redshift"
   project_name = var.project_name
-  database_name      = var.rs_database_name
+  # database_name      = var.rs_database_name
   node_type          = var.node_type
   cluster_type       = var.cluster_type
   SMname = var.SMname
@@ -29,14 +29,9 @@ source = "./components/redshift"
   iam_roles_arn = module.IAM.iam_roles_arn
   r-public = var.r-public
   RSencrypted = var.RSencrypted
-  sgRS = module.vpc.sgRS-id
-  secret_id         = module.secretmanager.secret_id
-  secret_version_id = module.secretmanager.secret_version_id
-  
-  
-
-
-  
+  sgRSid = module.vpc.sgRSid
+  secret_id = module.secretM.secret_id
+  secret_version_id = module.secretM.secret_version_id
 
 }
 
@@ -52,6 +47,14 @@ module "secretM" {
   
   
 }
+  output "rs-secret_name" {
+  value = module.secretM.secret_name
+
+} 
+ output "rs-secretmanager_id" {
+  value = module.secretM.secret_id
+} 
+  
 module "IAM" {
   source = "./components/IAM"
   project_name = var.project_name

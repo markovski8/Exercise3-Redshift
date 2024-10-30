@@ -44,7 +44,9 @@ module "secretM" {
   rs_password = var.rs_password
   cluster_type = var.cluster_type
   node_type = var.node_type
-  
+  # iam_roles_arn = module.IAM.iam_roles_arn
+  # redshift_endpoint = module.redshift.redshift_endpoint
+
   
 }
   output "rs-secret_name" {

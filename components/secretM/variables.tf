@@ -14,3 +14,5 @@ variable "rs_password" {}
 # variable "db_name" {}
 # variable "db_username" {}
 # variable "db_password" {}
+# variable "iam_roles_arn"{}
+# variable "redshift_endpoint" {}

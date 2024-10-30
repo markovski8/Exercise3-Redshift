@@ -1,7 +1,6 @@
-
 resource "aws_secretsmanager_secret" "rs-secret" {
   name        = var.SMname
-  description = "${var.project_name}-smng-key"
+  description = "${var.project_name}-smng key"
 /*   lifecycle {
     prevent_destroy = true
   } */
@@ -15,5 +14,6 @@ username    = var.rs_username
 password    = var.rs_password
   })
 }
+
 
 

@@ -8,24 +8,24 @@ resource "aws_iam_role" "RSrole" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
       "Principal": {
         "Service": [
-                    "scheduler.redshift.amazonaws.com",
-                    "redshift.amazonaws.com"
-                ]
+          "scheduler.redshift.amazonaws.com",
+          "redshift.amazonaws.com"
+        ]
       },
-      "Effect": "Allow",
-      "Sid": ""
+      "Action": "sts:AssumeRole"
     }
   ]
 }
 EOF
 
   tags = {
-    Name        = "${var.project_name}-RSrole"
+    Name = "${var.project_name}-RSrole"
   }
 }
+# Policy to allow Redshift to pause and resume clusters
 resource "aws_iam_policy" "redshift-scheduler-policy" {
   name        = "${var.project_name}-redshift-scheduler-policy"
   description = "Policy to allow Redshift to start and stop clusters"
@@ -44,9 +44,11 @@ resource "aws_iam_policy" "redshift-scheduler-policy" {
     ]
   })
 }
-resource "aws_iam_policy" "redshift-secret-access-policy" {
+
+# Policy to allow Redshift to read from Secrets Manager
+resource "aws_iam_policy" "redshift_secret_access_policy" {
   name        = "${var.project_name}-redshift-secret-access-policy"
-  description = "Policy to allow Redshift to read from Secrets Manager"
+  description = "Policy to allow Redshift to access Secrets Manager for admin credentials"
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -57,18 +59,23 @@ resource "aws_iam_policy" "redshift-secret-access-policy" {
           "secretsmanager:GetSecretValue",
           "secretsmanager:DescribeSecret"
         ],
-        Resource = "arn:aws:secretsmanager:eu-central-1:471112871708:secret:redshift-secret4-bz36fB"
+        Resource = "*"
       }
     ]
   })
 }
+
+
+
+# Attach the Secrets Manager access policy to the Redshift role
 resource "aws_iam_role_policy_attachment" "rs-secretm-policy-attachment" {
-  role = aws_iam_role.RSrole.name
-  policy_arn = aws_iam_policy.redshift-secret-access-policy.arn
+  role       = aws_iam_role.RSrole.name
+  policy_arn = aws_iam_policy.redshift_secret_access_policy.arn
 }
+
+# Attach the scheduler policy to the Redshift role
 resource "aws_iam_role_policy_attachment" "rs-policy-attachment" {
-    role = aws_iam_role.RSrole.name
-    policy_arn = aws_iam_policy.redshift-scheduler-policy.arn
-  
+  role       = aws_iam_role.RSrole.name
+  policy_arn = aws_iam_policy.redshift-scheduler-policy.arn
 }
 
